@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Workfit</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,700' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/ratchet.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      //Script to replicate the Ratchet functionality on desktop for click events (Ratchet's are touch based). This does hijack the normal a tag behavior.
+        $("a").on("click", function(){
+            if( $(this).parent().hasClass('switcher') ){
+              $('.switcher .control-item.active').removeClass('active');
+              $(this).addClass('active');
+              $('.card .control-content').hide();
+              var card = $(this).attr('href');
+              $(card).show();
+            }
+            if( $(this).hasClass('navigate-up') || $(this).hasClass('navigate-down') ){
+                var trig = $(this).data('trigger');
+                $(this).toggleClass('navigate-up').toggleClass('navigate-down');
+                $('#'+trig).slideToggle();
+            }
+            else{
+              window.location.replace($(this).attr('href'));
+            }
+        });
+
+        $('.table-view-cell a').on("touchend", function(ev) {
+            var trig = $(this).data('trigger');
+            $(this).toggleClass('navigate-up').toggleClass('navigate-down');
+            /*if($('#'+trig).hasClass('minim') ){
+              $('#'+trig).removeClass('minim');
+            }
+            else{$('#'+trig).addClass('minim');}*/
+            $('#'+trig).slideToggle();
+        });
+        
+      });
+    </script>
+    <script src="js/Chart.min.js"></script>
+    <script src="js/ratchet.min.js"></script>
+
+  </head>
+  <body>
+    <header class="bar bar-nav">
+      <h1 class="title"><a href="index.html"><img src="images/logo.png" id="top_logo" ></a></h1>
+    </header>
+    <nav class="bar bar-standard bar-header-secondary">
+      <div class="segmented-control">
+        <a class="control-item active" data-transition="slide-in" href="index.html">Me</a>
+        <a class="control-item " data-transition="slide-in" href="leaderboard.html">Team</a>
+        <a class="control-item" data-transition="slide-in" href="activities.html">Activities</a>
+      </div>
+    </nav>
+    
+
+    <div class="content" id="metric">
+    
+    <script type="text/javascript">
+    //Basic implementation of Chart.js 
+
+    var barChartData = {
+        labels: ["Mo","Tu","We","Th","Fr","Sa","Su"],
+        datasets : [
+            {
+                fillColor: "#00C8E3",
+                        strokeColor: "rgba(1,209,197,1)",
+                        pointColor: "rgba(255,255,255,1)",
+                        pointStrokeColor: "#21C8FF",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "#21C8FF",
+                        data: [22, 12, 8, 10]
+            }
+        ]
+
+    }
+    window.onload = function(){
+        var ctx = document.getElementById("myChart").getContext("2d");
+        window.myBar = new Chart(ctx).Line(barChartData, {
+            responsive : true
+        });
+        var ctx2 = document.getElementById("myChart2").getContext("2d");
+        window.myBar = new Chart(ctx2).Line(barChartData, {
+            responsive : true
+        });
+        var ctx3 = document.getElementById("myChart3").getContext("2d");
+        window.myBar = new Chart(ctx3).Line(barChartData, {
+            responsive : true
+        });
+
+        $('.card-content').slice(1).hide();
+    }
+    </script>
+    <nav class="bar bar-standard bar-header-tertiary">
+      <a class="btn btn-link btn-nav pull-left" href="index.html" data-transition="slide-left">
+        <span class="icon-BackArrow"></span>
+      </a>
+      <h1 class="title">Software Units</h1>
+    </nav>
+      <div class="segmented-control switcher">
+        <a class="control-item active" href="#item1mobile">
+          Wks
+        </a>
+        <a class="control-item" href="#item1mobile">
+          Qtrs
+        </a>
+        <a class="control-item" href="#item1mobile">
+          Yrs
+        </a>
+      </div>
+      <div class="card">
+        <span id="item1mobile" class="control-content active">
+          <ul class="table-view">
+            <li class="table-view-cell">
+              <a class="navigate-down" data-trigger="card1">
+                This Week (1/19 - 1/25) <span class="pull-right sm-txt">52 Software Units</span>
+              </a>
+              <div class="card-content " id="card1">  
+
+                <canvas id="myChart" width="400" height="150"></canvas>
+                <table width="100%">
+                  <tr class="goal">
+                    <td>Mo 1/19</td>
+                    <td><b>22</b>Software Units</td>
+                    <td><i>Daily Goal Met!</i></td>
+                  </tr>
+                  <tr>
+                    <td>Tu 1/20</td>
+                    <td><b>12</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>We 1/21</td>
+                    <td><b>8</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Th 1/22</td>
+                    <td><b>10</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Fr 1/23</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Sa 1/24</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Su 1/25</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+            <li class="table-view-cell">
+              <a class="navigate-up" data-trigger="card2">
+                Last Week (1/12 - 1/18)  <span class="pull-right sm-txt">52 Software Units</span>
+              </a>
+              <div class="card-content" id="card2">
+                <canvas id="myChart2" width="400" height="150"></canvas>
+                <table width="100%">
+                  <tr class="goal">
+                    <td>Mo 1/12</td>
+                    <td><b>22</b>Software Units</td>
+                    <td><i>Daily Goal Met!</i></td>
+                  </tr>
+                  <tr>
+                    <td>Tu 1/13</td>
+                    <td><b>12</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>We 1/14</td>
+                    <td><b>8</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Th 1/15</td>
+                    <td><b>10</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Fr 1/16</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Sa 1/17</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Su 1/18</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+            <li class="table-view-cell">
+              <a class="navigate-up" data-trigger="card3">
+                Jan 5 - Jan 11  <span class="pull-right sm-txt">52 Software Units</span>
+              </a>
+              <div class="card-content" id="card3">
+                <canvas id="myChart3" width="400" height="150"></canvas>
+                <table width="100%">
+                  <tr class="goal">
+                    <td>Mo 1/5</td>
+                    <td><b>22</b>Software Units</td>
+                    <td><i>Daily Goal Met!</i></td>
+                  </tr>
+                  <tr>
+                    <td>Tu 1/6</td>
+                    <td><b>12</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>We 1/7</td>
+                    <td><b>8</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Th 1/8</td>
+                    <td><b>10</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Fr 1/9</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Sa 1/10</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Su 1/11</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+          </ul>
+        </span>
+        <span id="item2mobile" class="control-content ">
+          <ul class="table-view">
+            <li class="table-view-cell">
+              <a class="navigate-up" data-trigger="card4">
+                This Week (1/19 - 1/25)
+              </a>
+              <div class="card-content " id="card4">
+                <canvas id="myChart4" width="400" height="150"></canvas>
+                <table width="100%">
+                  <tr>
+                    <td>Mo 1/19</td>
+                    <td><b>22</b>Software Units</td>
+                    <td><i>Daily Goal Met!</i></td> 
+                  </tr>
+                  <tr>
+                    <td>Tu 1/20</td>
+                    <td><b>12</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>We 1/21</td>
+                    <td><b>8</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Th 1/22</td>
+                    <td><b>10</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Fr 1/23</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Sa 1/24</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Su 1/25</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+            <li class="table-view-cell">
+              <a class="navigate-up" data-trigger="card5">
+                Last Week (1/12 - 1/18)
+              </a>
+              <div class="card-content" id="card5">
+                <canvas id="myChart5" width="400" height="150"></canvas>
+                <table width="100%">
+                  <tr>
+                    <td>Mo 1/12</td>
+                    <td><b>22</b>Software Units</td>
+                    <td>Daily Goal Met!</td>
+                  </tr>
+                  <tr>
+                    <td>Tu 1/13</td>
+                    <td><b>12</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>We 1/14</td>
+                    <td><b>8</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Th 1/15</td>
+                    <td><b>10</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Fr 1/23</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Sa 1/24</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Su 1/25</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+            <li class="table-view-cell">
+              <a class="navigate-up" data-trigger="card6">
+                Jan 5 - Jan 11
+              </a>
+              <div class="card-content" id="card">
+                <canvas id="myChart6" width="400" height="150"></canvas>
+                <table width="100%">
+                  <tr>
+                    <td>Mo 1/19</td>
+                    <td><b>22</b>Software Units</td>
+                    <td>Daily Goal Met!</td>
+                  </tr>
+                  <tr>
+                    <td>Tu 1/19</td>
+                    <td><b>12</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>We 1/19</td>
+                    <td><b>8</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Th 1/19</td>
+                    <td><b>10</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Fr 1/23</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Sa 1/24</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                  <tr class="grayedOut">
+                    <td>Su 1/25</td>
+                    <td><b>-</b>Software Units</td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+          </ul>
+        </span>
+      </div>
+
+
+      
+    </div><!-- /.content -->
+
+  </body>
+</html>

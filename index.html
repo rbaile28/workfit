@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Workfit</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,700' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/ratchet.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/ratchet.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("a").on("click", function(){
+            if( $(this).parent().hasClass('switcher') ){
+              $('.switcher .control-item.active').removeClass('active');
+              $(this).addClass('active');
+              $('.card .control-content').hide();
+              var card = $(this).attr('href');
+              $(card).show();
+            }
+            else{
+              window.location.replace($(this).attr('href'));
+            }
+        });
+
+      });
+    </script>
+    <script>
+      /* Scripts are loaded by Ratchet from this file. So for all sub page scripts to work, we must detect if certain elements are present */
+      var checkPage = function(){
+          if(document.getElementsByClassName('navigate-up')) {
+              $('.navigate-up').on("touchend", function(ev) {
+                  var trig = $(this).data('trigger');
+                  $('#'+trig).slideToggle();
+              });
+
+              var ctx = $("#myChart").get(0).getContext("2d");
+    
+              var data = {
+                  labels: ["Mo","Tu","We","Th","Fr","Sa","Su"],
+                  datasets: [
+                      {
+                          fillColor: "#00C8E3",
+                          strokeColor: "rgba(1,209,197,1)",
+                          pointColor: "rgba(255,255,255,1)",
+                          pointStrokeColor: "#21C8FF",
+                          pointHighlightFill: "#fff",
+                          pointHighlightStroke: "#21C8FF",
+                          data: [22, 12, 8, 10]
+                      }
+                  ]
+              };
+              Chart.defaults.global.responsive = true;
+              var myLineChart = new Chart(ctx).Line(data, {    bezierCurve: false  });
+          }
+      };
+
+      $(document).ready(function(){
+        $("a").on("click", function(){
+            if( $(this).hasClass('control-item') ){
+              $('.card .control-content').hide();
+              var card = $(this).attr('href');
+              $(card).show();
+            }
+            else{
+              window.location.replace($(this).attr('href'));
+            }
+        });
+
+      });
+      
+    </script>
+  </head>
+  <body>
+    <header class="bar bar-nav">
+      <h1 class="title"><a href="index.html"><img src="images/logo.png" id="top_logo" ></a></h1>
+    </header>
+    <nav class="bar bar-standard bar-header-secondary">
+      <div class="segmented-control">
+        <a class="control-item active" data-transition="slide-in" href="index.html">Me</a>
+        <a class="control-item " data-transition="slide-in" href="leaderboard.html">Team</a>
+        <a class="control-item" data-transition="slide-in" href="activities.html">Activities</a>
+      </div>
+    </nav>
+    
+
+    <div class="content" id="index">
+      <nav class="bar bar-standard bar-header-tertiary">
+        <button class="btn btn-link btn-nav pull-left">
+          <span class="icon-LeftArrow rotate"></span>
+        </button>
+        <button class="btn btn-link btn-nav pull-right">
+          <span class="icon-RightArrow half"></span>
+        </button>
+        <h1 class="title">This Week</h1>
+      </nav>
+
+      <ul class="table-view">
+        <li class="table-view-cell media">
+          <a class="navigate-right" href="profile.html" data-ignore="push" data-transition="slide-in">
+            <div class="media-object pull-left"><span class="badge"></span><img width="100px" class="img-circle" src="images/murray.png" /></div>
+            <div class="media-body">
+              <h4>Bill Murray</h4>
+              <h5>Software Developer</h5>
+              <p>1st Place</p>
+              <p>1024 Points</p>
+            </div>
+          </a>
+        </li>
+        <li class="table-view-cell media">
+          <a class="navigate-right" href="metric.html" data-ignore="push" data-transition="slide-in">
+            <div class="media-body">
+              <h1>52</h1><h6>Software Units</h6><h7>Goal:100</h7>
+              <div class="pb">
+                <span class="pbar" style="width:52%;"></span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="table-view-cell media">
+          <a class="navigate-right" href="metric.html" data-ignore="push" data-transition="slide-in">
+            <div class="media-body">
+              <h1>12</h1><h6>Machine Learning Studies</h6><h7>Goal:15</h7>
+              <div class="pb">
+                <span class="pbar" style="width:80%;"></span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="table-view-cell media">
+          <a class="navigate-right" href="metric.html" data-ignore="push" data-transition="slide-in">
+            <div class="media-body">
+              <h1>8</h1><h6>Bugs Squashed</h6><h7>Goal:50</h7>
+              <div class="pb">
+                <span class="pbar" style="width:16%;"></span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+
+      </ul>
+    </div><!-- /.content -->
+  </body>
+</html>

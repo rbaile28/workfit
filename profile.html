@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Workfit</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,700' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/ratchet.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/ratchet.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      //Script to replicate the Ratchet functionality on desktop for click events (Ratchet's are touch based). This does hijack the normal a tag behavior.
+        $("a").on("click", function(){
+            if( $(this).parent().hasClass('switcher') ){
+              $('.switcher .control-item.active').removeClass('active');
+              $(this).addClass('active');
+              $('.card .control-content').hide();
+              var card = $(this).attr('href');
+              $(card).show();
+            }
+            else{
+              window.location.replace($(this).attr('href'));
+            }
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <header class="bar bar-nav">
+      <h1 class="title"><a href="index.html"><img src="images/logo.png" id="top_logo" ></a></h1>
+    </header>
+    <nav class="bar bar-standard bar-header-secondary">
+      <div class="segmented-control">
+        <a class="control-item active" data-transition="slide-in" href="index.html">Me</a>
+        <a class="control-item " data-transition="slide-in" href="leaderboard.html">Team</a>
+        <a class="control-item" data-transition="slide-in" href="activities.html">Activities</a>
+      </div>
+    </nav>
+    
+
+    <div class="content" id="profile">
+    <nav class="bar bar-standard bar-header-tertiary">
+      <a class="btn btn-link btn-nav pull-left" href="index.html" data-transition="slide-left">
+        <span class="icon-BackArrow"></span>
+      </a>
+      <h1 class="title">My Profile</h1>
+    </nav>
+
+      <ul class="table-view">
+        <li class="table-view-cell media">
+            <div class="media-object pull-left"><img width="100px" class="img-circle" src="images/murray.png" /></div>
+            <div class="media-body">
+              <h4>Bill Murray</h4>
+              <h5 class="light">Software Developer</h5>
+              <p class="bolder"><span class="icon-Location"></span>Brooklyn, NY, USA</p>
+              <p class="bolder"><span class="icon-Mail"></span>bmurray@intellum.com</p>
+            </div>
+        </li>
+        <li class="table-view-cell media">
+          <div class="media-body stats">
+            <h1>Stats</h1>
+            <p>Average: <b>100 points per week</b></p>
+            <p>Leaderboard: <b>1st (All Time)</b></p>
+            <p><b>10 props | 5 badges</b></p>
+            <table width="100%">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Wk</th>
+                  <th>Mo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Software Units</td>
+                  <td>52</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>Machine Learning Studies</td>
+                  <td>12</td>
+                  <td>22</td>
+                </tr>
+                <tr>
+                  <td>Bugs Squashed</td>
+                  <td>8</td>
+                  <td>12</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </li>
+        <li class="table-view-cell media">
+          <div class="media-body props">
+            <h1>Props</h1>
+            <p><b>Bill has been given props <a href="activities.html" data-transition="slide-in">10 Times</a>.</b></p>
+            <p class="props_list"><span><img src="images/murray.png" width="24px" class="img-circle"> Luc Castera x5, </span><span><img src="images/obama.png" width="24px" class="img-circle"> Chip Ramsey x2,</span><span> <img width="24px" src="images/vince.png" class="img-circle"> Pablo Torres, </span><span><img width="24px" src="images/obama.png" class="img-circle"> Florent Guillex and</span>  <span><img width="24px" src="images/vince.png" class="img-circle"> Simon Rentzke.</span></p>
+          </div>
+        </li>
+        <li class="table-view-cell media">
+          <div class="media-body">
+            <h1>Badges</h1>
+            <div class="segmented-control switcher">
+              <a class="control-item active" href="#item1mobile">
+                My Badges
+              </a>
+              <a class="control-item" href="#item2mobile">
+                All Badges
+              </a>
+            </div>
+            <div class="card">
+              <span id="item1mobile" class="control-content active">
+                <ul class="table-view badge-list">
+                  <li class="table-view-cell media">
+                    <div class="media-object pull-left">
+                      <img width="50px" class="img-circle" src="https://images.blogthings.com/thecolorfulpatterntest/pattern-4.png" />
+                    </div>
+                    <div class="media-body">
+                      <h8>Early Bird <span class="ptsBadges"><b>5 pts</b> 1x</span></h8>
+                      <p>Complete weekly goal ahead of time.</p>
+                    </div>
+                  </li>
+                  <li class="table-view-cell media">
+                    <div class="media-object pull-left">
+                      <img width="50px" class="img-circle" src="https://images.blogthings.com/thecolorfulpatterntest/pattern-1.png" />
+                    </div>
+                    <div class="media-body">
+                      <h8>Hammertime <span class="ptsBadges"><b>5 pts</b> 2x</span></h8>
+                      <p>Complete more software units than anyone on the team this week.</p>
+                    </div>
+                  </li>
+                  <li class="table-view-cell media">
+                    <div class="media-object pull-left">
+                      <img width="50px" class="img-circle" src="https://shefaalhammadi.files.wordpress.com/2013/05/abstract-colorful-patterns.jpg" />
+                    </div>
+                    <div class="media-body">
+                      <h8>Overachiever <span class="ptsBadges"><b>5 pts</b> 1x</span></h8>
+                      <p>Achieve 50% more than monthly goal.</p>
+                    </div>
+                  </li>
+                </ul>
+              </span>
+              <span id="item2mobile" class="control-content">
+                <ul class="table-view badge-list">
+                  <li class="table-view-cell media">
+                    <div class="media-object pull-left">
+                      <img width="50px" class="img-circle" src="https://shefaalhammadi.files.wordpress.com/2013/05/abstract-colorful-patterns.jpg" />
+                    </div>
+                    <div class="media-body">
+                      <h8>Marathon Runner <span class="ptsBadges"><b>5 pts</b> 1x</span></h8>
+                      <p>Complete 10 bugs in a day.</p>
+                    </div>
+                  </li>
+                  <li class="table-view-cell media">
+                    <div class="media-object pull-left">
+                      <img width="50px" class="img-circle" src="https://images.blogthings.com/thecolorfulpatterntest/pattern-4.png" />
+                    </div>
+                    <div class="media-body">
+                      <h8>Swordfish <span class="ptsBadges"><b>5 pts</b> 1x</span></h8>
+                      <p>Hack the mainframe.</p>
+                    </div>
+                  </li>
+                  <li class="table-view-cell media">
+                    <div class="media-object pull-left">
+                      <img width="50px" class="img-circle" src="https://images.blogthings.com/thecolorfulpatterntest/pattern-1.png" />
+                    </div>
+                    <div class="media-body">
+                      <h8>Firewall <span class="ptsBadges"><b>5 pts</b> 2x</span></h8>
+                      <p>Find a vulnerability.</p>
+                    </div>
+                  </li>
+                  
+                </ul>
+              </span>
+            </div>
+
+
+          </div>
+        </li>
+      </ul>
+    </div><!-- /.content -->
+
+  </body>
+</html>
